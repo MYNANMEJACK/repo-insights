@@ -2,13 +2,12 @@ name: Generate Insights
 
 on:
   schedule:
-    - cron: "0 1 * * *" # 每天凌晨1點執行
-  workflow_dispatch:     # 允許手動觸發
+    - cron: "0 1 * * *"
+  workflow_dispatch:
 
 jobs:
   generate-insights:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,9 +21,9 @@ jobs:
           git checkout insights || git checkout -b insights
 
       - name: Generate GitHub Insights
-        uses: emillig/github-repo-insights@v1.1.0
+        uses: emillig/github-repo-insights@main
         with:
-          repos: "MYNAMMEJACK/cv-website,MYNAMMEJACK/foodorder,MYNAMMEJACK/gogoapp"
+          repos: "MYNAMMEJACK/foodorder,MYNAMMEJACK/gogo,MYNAMMEJACK/cv-website"
           pat-token: ${{ secrets.PAT_TOKEN }}
 
       - name: Commit and push insights
